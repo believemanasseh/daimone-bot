@@ -9,6 +9,11 @@ class Request(BaseModel):
     message: dict | None = None
 
 
+@app.get("/")
+async def home():
+    return "Welcome to daimone-bot"
+
+
 @app.post("/webhook")
 async def webhook(request: Request, x_telegram_bot_api_secret_token: str | None = Header(default=None)):
    

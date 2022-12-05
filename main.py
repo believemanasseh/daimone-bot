@@ -1,3 +1,4 @@
+from typing import Union
 from fastapi import FastAPI, Header, status
 from pydantic import BaseModel
 from config import settings
@@ -6,7 +7,7 @@ app = FastAPI()
 
 class Request(BaseModel):
     update_id: str
-    message: dict | None = None
+    message: Union[dict, None] = None
 
 
 @app.get("/")

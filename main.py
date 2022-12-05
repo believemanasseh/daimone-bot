@@ -1,4 +1,5 @@
 from typing import Union
+
 from fastapi import FastAPI, Header, status
 from pydantic import BaseModel
 from config import settings
@@ -17,7 +18,7 @@ async def home():
 
 @app.post("/webhook")
 async def webhook(request: Request, x_telegram_bot_api_secret_token: Union[str, None] = Header(default=None)):
-   
+    print(request)
     if not x_telegram_bot_api_secret_token:
         return status.HTTP_400_BAD_REQUEST
 

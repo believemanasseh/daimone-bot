@@ -16,7 +16,7 @@ async def home():
 
 
 @app.post("/webhook")
-async def webhook(request: Request, x_telegram_bot_api_secret_token: str | None = Header(default=None)):
+async def webhook(request: Request, x_telegram_bot_api_secret_token: Union[str, None] = Header(default=None)):
    
     if not x_telegram_bot_api_secret_token:
         return status.HTTP_400_BAD_REQUEST

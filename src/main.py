@@ -50,7 +50,6 @@ async def webhook(
     context = {"step": 0, "response": []}
 
     current_response_map = await cache.get(chat_id)
-    print(current_response_map, "Her")
     if not current_response_map:
         await cache.set(chat_id, jsonpickle.encode(context), expire=5)
 
@@ -80,12 +79,12 @@ async def webhook(
                 )
             elif deserialized_response_map["step"] == 1:
                 deserialized_response_map["handler"] = retrieve_handler(message)
-                await cache.set(chat_id, jsonpickle.encode(deserialized_response_map))
+                await cache.set(chat_id, jsonpickle.encode(deserialized_response_map), expire=5)
     
     if location:
         location = request.message.get("location")
         deserialized_response_map["location"] = location
-        await cache.set(chat_id, jsonpickle.encode(deserialized_response_map))
+        await cache.set(chat_id, jsonpickle.encode(deserialized_response_map), expire=5)
 
     message = await deserialized_response_map["handler"].handle(chat_id, message)
     return send_message({"chat_id": chat_id, "text": message})

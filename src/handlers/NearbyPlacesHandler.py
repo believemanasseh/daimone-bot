@@ -11,7 +11,7 @@ class NearbyPlacesHandler:
         steps = get_steps()
         cache = redis_cache()
         deserialized_response_map = jsonpickle.decode(await cache.get(chat_id))
-        
+
         if deserialized_response_map["step"] == 3:
             latitude = deserialized_response_map["location"]["latitude"]
             longitude = deserialized_response_map["location"]["latitude"]
@@ -26,10 +26,10 @@ class NearbyPlacesHandler:
             if results:
                 message = ""
                 for index, place in enumerate(results):
-                    message += f"""\n{index + 1}) Name: {place["name"]}
-                    \nIcon: {place["icon"]}
-                    \nTypes: {place["icon"]}
-                    \nVicinity: {place["vicinity"]}
+                    message += f"""\n{index + 1}) NAME: {place["name"]}
+                    \nICON: {place["icon"]}
+                    \nTYPES: {place["types"]}
+                    \nVICINITY: {place["vicinity"]}
                     \n\n
                     """
             else:   
